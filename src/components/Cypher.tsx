@@ -1,21 +1,25 @@
+import './Cypher.css';
+
 import React, { useState } from 'react';
 import useCaesarCypher from '../hooks/useCaesarCypher';
 
 const CaesarCipherForm: React.FC = () => {
   const [text, setText] = useState('');
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(1);
   const [isPositive, setIsPositive] = useState(true);
 
   const cipheredText = useCaesarCypher({string: text, offset: isPositive ? offset : -offset});
 
   return (
-    <div>
+    <main>
+      <h1>Jess' Cypher-inator 🤖</h1>
       <form>
         <div>
           <label>
             Text:
             <input
               type="text"
+              placeholder='Enter text to encrypt here!'
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
@@ -23,11 +27,11 @@ const CaesarCipherForm: React.FC = () => {
         </div>
         <div>
           <label>
-            Offset: {offset}
+            Offsetting result by: {offset}
             <input
               type='range'
-              min={0}
-              max={26}
+              min={1}
+              max={25}
               onChange={(e) => setOffset(parseInt(e.target.value, 10))}
             />
           </label>
@@ -52,10 +56,10 @@ const CaesarCipherForm: React.FC = () => {
         </div>
       </form>
       <div>
-        <h3>Preview:</h3>
-        <p>{cipheredText.result}</p>
+        <label>Preview:</label>
+        <p className='textPreview'>{cipheredText.result}</p>
       </div>
-    </div>
+    </main>
   );
 };
 

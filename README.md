@@ -5,7 +5,7 @@ This is a problem that I'm familiar with from back in the day - I made a little 
 
 ## My approach
 
-I decided to focus primarily on the functionality of the cypher and ensuring that it was working correctly. I used a simple Caesar cypher to encode the text, based on what I could piece together from memory. 
+I decided to focus primarily on the functionality of the cipher and ensuring that it was working correctly. I used a simple Caesar cipher to encode the text, based on what I could piece together from memory. 
 I began with unit testing the expected functionality, and then built a react hook that conformed to the results of the tests. 
 After a few rounds of testing, building and testing again I realised I was close to out of time, and settled on the test cases I had for the function and began with the components themselves.
 

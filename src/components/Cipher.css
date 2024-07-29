@@ -1,0 +1,22 @@
+ label {
+   display: block;
+   font-weight: 600;
+   margin-top: 1rem;
+ }
+
+ input {
+  display: block;
+  margin-top:0.5rem;
+ }
+
+ label > input[type="radio"] {
+   display: inline;
+   margin-top: 0;
+ }
+
+ .textPreview {
+  padding: 0.5rem;
+  border : 1px solid #ccc;
+  border-radius: 8px;
+  line-height: normal;
+ }

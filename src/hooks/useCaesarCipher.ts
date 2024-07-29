@@ -1,18 +1,18 @@
 
 
-interface CaesarCypherResult {
+interface CaesarCipherResult {
   result: string;
   error: Error | null;
 }
 
-interface CaesarCypherProps {
+interface CaesarCipherProps {
   string: string;
   offset: number;
 }
 
 const REGEX_CAPTURE = /[a-zA-Z]/g;
 
-function useCaesarCypher({ string, offset }: CaesarCypherProps): CaesarCypherResult {
+function useCaesarCipher({ string, offset }: CaesarCipherProps): CaesarCipherResult {
   if (isNaN(offset)) {
     return {
       result: '',
@@ -67,4 +67,4 @@ function useCaesarCypher({ string, offset }: CaesarCypherProps): CaesarCypherRes
 
 }
 
-export default useCaesarCypher;
+export default useCaesarCipher;

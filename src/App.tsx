@@ -1,5 +1,5 @@
 import './App.css'
-import CaesarCipherForm from './components/Cypher'
+import CaesarCipherForm from './components/Cipher'
 
 function App() {
 

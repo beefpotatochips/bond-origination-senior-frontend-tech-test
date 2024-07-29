@@ -1,18 +1,18 @@
-import './Cypher.css';
+import './Cipher.css';
 
 import React, { useState } from 'react';
-import useCaesarCypher from '../hooks/useCaesarCypher';
+import useCaesarCipher from '../hooks/useCaesarCipher';
 
 const CaesarCipherForm: React.FC = () => {
   const [text, setText] = useState('');
   const [offset, setOffset] = useState(1);
   const [isPositive, setIsPositive] = useState(true);
 
-  const cipheredText = useCaesarCypher({string: text, offset: isPositive ? offset : -offset});
+  const cipheredText = useCaesarCipher({string: text, offset: isPositive ? offset : -offset});
 
   return (
     <main>
-      <h1>Jess' Cypher-inator 🤖</h1>
+      <h1>Jess' Cipher-inator 🤖</h1>
       <form>
         <div>
           <label>

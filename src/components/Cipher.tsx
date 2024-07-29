@@ -30,6 +30,7 @@ const CaesarCipherForm: React.FC = () => {
             Offsetting result by: {offset}
             <input
               type='range'
+              value={offset}
               min={1}
               max={25}
               onChange={(e) => setOffset(parseInt(e.target.value, 10))}

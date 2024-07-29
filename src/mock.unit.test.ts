@@ -13,12 +13,27 @@ describe('useCaesarCypher', () => {
   });
 
   it('should return a correctly encrypted string when provided with a string and positive offset', () => {
-    const { result } = renderHook(() => useCaesarCypher({ string: 'foo', offset: 1 }));
-    expect(result.current.result).toEqual('gpp');
+    const { result } = renderHook(() => useCaesarCypher({
+      string: "Hello, my name is Jess. I'm writing a caesar cipher. It's quite fun, I've not done something like this since back in the day when ROT13 was the done thing for spoilers in books in IRC. Good times!",
+      offset: 13
+    }));
+    expect(result.current.result).toEqual("Uryyb, zl anzr vf Wrff. V'z jevgvat n pnrfne pvcure. Vg'f dhvgr sha, V'ir abg qbar fbzrguvat yvxr guvf fvapr onpx va gur qnl jura EBG13 jnf gur qbar guvat sbe fcbvyref va obbxf va VEP. Tbbq gvzrf!",);
   });
 
   it('should return a correctly encrypted string when provided with a string and negative offset', () => {
-    const { result } = renderHook(() => useCaesarCypher({ string: 'foo', offset: -1 }));
-    expect(result.current.result).toEqual('enn');
+    const { result } = renderHook(() => useCaesarCypher({ string: 'hello! test 123', offset: -5 }));
+    expect(result.current.result).toEqual('czggj! ozno 123');
+  });
+
+  it('should return an error when trying to shift beyond the letters of the alphabet', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: 'hello! test 123', offset: 27 }));
+
+    expect(result.current.error).toEqual(Error('Offset is too large'));
+  });
+
+  it('should return an error and the result when shifting by floating point numbers', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: 'hello! test 123', offset: 1.5 }));
+    expect(result.current.error).toEqual(Error('Offset is not a number'));
+    expect(result.current.result).toEqual('gdkkn! sdrs 123');
   });
 });

@@ -1,59 +1,39 @@
-test("Number equality", () => {
-  expect(1 + 1).toBe(2);
-  expect(2 * 2).toBe(4);
-  expect(5 - 3).toBe(2);
-  expect(9 / 3).toBe(3);
-});
+import { renderHook } from '@testing-library/react';
+import useCaesarCypher from './hooks/useCaesarCypher';
 
-test("String equality", () => {
-  expect("hello").toBe("hello");
-  expect("jest".toUpperCase()).toBe("JEST");
-  expect("jest".substring(0, 2)).toBe("je");
-  expect("foo" + "bar").toBe("foobar");
-});
+describe('useCaesarCypher', () => {
+  it('should throw an error when the offset is not a number', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: 'foo', offset: NaN }));
+    expect(result.current.error).toEqual(Error('Offset is not a number'));
+  });
 
-test("Array equality", () => {
-  expect([1, 2, 3]).toEqual([1, 2, 3]);
-  expect([1, 2, 3].length).toBe(3);
-  expect([1, 2, 3].includes(2)).toBe(true);
-});
+  it('should return a blank string in the case it receives an empty string', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: '', offset: 1 }));
+    expect(result.current.result).toEqual('');
+  });
 
-test("Object equality", () => {
-  const obj1 = { name: "Alice", age: 25 };
-  const obj2 = { name: "Alice", age: 25 };
-  expect(obj1).toEqual(obj2);
-  expect(obj1.name).toBe("Alice");
-  expect(obj1.age).toBe(25);
-});
+  it('should return a correctly encrypted string when provided with a string and positive offset', () => {
+    const { result } = renderHook(() => useCaesarCypher({
+      string: "Hello, my name is Jess. I'm writing a caesar cipher. It's quite fun, I've not done something like this since back in the day when ROT13 was the done thing for spoilers in books in IRC. Good times!",
+      offset: 13
+    }));
+    expect(result.current.result).toEqual("Uryyb, zl anzr vf Wrff. V'z jevgvat n pnrfne pvcure. Vg'f dhvgr sha, V'ir abg qbar fbzrguvat yvxr guvf fvapr onpx va gur qnl jura EBG13 jnf gur qbar guvat sbe fcbvyref va obbxf va VEP. Tbbq gvzrf!",);
+  });
 
-test("Truthy and falsy values", () => {
-  expect(true).toBeTruthy();
-  expect(false).toBeFalsy();
-  expect(0).toBeFalsy();
-  expect(1).toBeTruthy();
-  expect("").toBeFalsy();
-  expect("non-empty string").toBeTruthy();
-  expect(null).toBeFalsy();
-  expect(undefined).toBeFalsy();
-  expect(NaN).toBeFalsy();
-});
+  it('should return a correctly encrypted string when provided with a string and negative offset', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: 'hello! test 123', offset: -5 }));
+    expect(result.current.result).toEqual('czggj! ozno 123');
+  });
 
-test("Deep equality", () => {
-  const nestedObj1 = { a: { b: { c: 1 } } };
-  const nestedObj2 = { a: { b: { c: 1 } } };
-  expect(nestedObj1).toEqual(nestedObj2);
-});
+  it('should return an error when trying to shift beyond the letters of the alphabet', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: 'hello! test 123', offset: 27 }));
 
-test("Equality with toBeCloseTo", () => {
-  expect(0.1 + 0.2).toBeCloseTo(0.3, 5);
-});
+    expect(result.current.error).toEqual(Error('Offset is too large'));
+  });
 
-test("Regex match", () => {
-  expect("foobar").toMatch(/foo/);
-  expect("barfoo").toMatch(/^bar/);
-});
-
-test("Array containing", () => {
-  expect([1, 2, 3]).toContain(2);
-  expect(["apple", "banana", "cherry"]).toContain("banana");
+  it('should return an error and the result when shifting by floating point numbers', () => {
+    const { result } = renderHook(() => useCaesarCypher({ string: 'hello! test 123', offset: 1.5 }));
+    expect(result.current.error).toEqual(Error('Offset is not a number'));
+    expect(result.current.result).toEqual('gdkkn! sdrs 123');
+  });
 });

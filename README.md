@@ -1,22 +1,20 @@
 # The Bots Frontend coding challenge
+## My solution
 
-For this challenge we would like you to create a [Caeser Cipher](https://en.wikipedia.org/wiki/Caesar_cipher). You will create an input, which will take any string and apply the cipher, then display the results below.
+This is a problem that I'm familiar with from back in the day - I made a little windows program in visual basic to do something similar to easily translate spoilers in forums using ROT13.
 
-## The Spec
+## My approach
 
-- Create a form which takes a string input, and outputs the string with the cipher applied
-- Add a form element to set if the cipher is applied forwards or backwards
-- Numbers & special characters should be ignored
-
-## Getting started
-
-- Open a terminal and run \`npm run dev\`
-- A second terminal can be opened to run tests: \`npm run test\`
+I decided to focus primarily on the functionality of the cypher and ensuring that it was working correctly. I used a simple Caesar cypher to encode the text, based on what I could piece together from memory. 
+I began with unit testing the expected functionality, and then built a react hook that conformed to the results of the tests. 
+After a few rounds of testing, building and testing again I realised I was close to out of time, and settled on the test cases I had for the function and began with the components themselves.
 
 ## Considerations
 
-- No libraries please
-- Please provide the solution with tests & types
-- Expected time should be 1 hour
+Given the spec, I decided to focus on the functionality rather than form. I would have liked to have styled the components a little, and added some quality of life features like copy to clipboard, but I ran out of time.
 
-Please fork this repo and send us a link to your solution. Good luck!
+## How to run
+
+Built with node v20.16.0 and npm 10.8.1. 
+The dev server can be spun up with `npm run dev` and the tests can be run with `npm run test`.
+Preview/Built out server use `npm run build && npm run preview`.

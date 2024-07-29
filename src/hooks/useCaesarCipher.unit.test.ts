@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useCaesarCipher from './hooks/useCaesarCipher';
+import useCaesarCipher from './useCaesarCipher';
 
 const VALID_STRING = "SPHINX OF BLACK QUARTZ, JUDGE MY VOW";
 const ENCRYPTED_ROT_13 = "FCUVAK BS OYNPX DHNEGM, WHQTR ZL IBJ";

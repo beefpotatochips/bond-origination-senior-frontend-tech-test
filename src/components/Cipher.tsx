@@ -15,9 +15,10 @@ const CaesarCipherForm: React.FC = () => {
       <h1>Jess' Cipher-inator 🤖</h1>
       <form>
         <div>
-          <label>
+          <label id='textEncryptionInput'>
             Text:
             <input
+              aria-labelledby='textEncryptionInput'
               type="text"
               placeholder='Enter text to encrypt here!'
               value={text}
@@ -26,9 +27,10 @@ const CaesarCipherForm: React.FC = () => {
           </label>
         </div>
         <div>
-          <label>
+          <label id='offsetRange'>
             Offsetting result by: {offset}
             <input
+              aria-labelledby='offsetRange'
               type='range'
               value={offset}
               min={1}
@@ -38,16 +40,18 @@ const CaesarCipherForm: React.FC = () => {
           </label>
         </div>
         <div>
-          <label>
+          <label id='positiveRadioButton'>
             <input
+              aria-labelledby='positiveRadioButton'
               type="radio"
               checked={isPositive}
               onChange={() => setIsPositive(true)}
             />
             Positive
           </label>
-          <label>
+          <label id='negativeRadioButton'>
             <input
+              aria-labelledby='negativeRadioButton'
               type="radio"
               checked={!isPositive}
               onChange={() => setIsPositive(false)}
@@ -57,8 +61,10 @@ const CaesarCipherForm: React.FC = () => {
         </div>
       </form>
       <div>
-        <label>Preview:</label>
-        <p className='textPreview'>{cipheredText.result}</p>
+        <label id='textPreviewLabel'>
+          Preview:
+          <p aria-labelledby='textPreviewLabel' className='textPreview'>{cipheredText.result}</p>
+        </label>
       </div>
     </main>
   );
